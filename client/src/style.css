@@ -1,0 +1,29 @@
+#app {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    background: #333;
+    overflow: hidden;
+}
+
+.player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px; /* Або 4% */
+    height: 40px;
+    background: #00ffcc;
+    border: 2px solid white;
+    will-change: transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-name {
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    top: -15px;
+    white-space: nowrap;
+}
