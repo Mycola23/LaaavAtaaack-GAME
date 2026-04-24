@@ -12,5 +12,6 @@ export function createPlayer(id: string, name: string, isLeader: boolean): Playe
         isLeader,
         input: { up: false, down: false, left: false, right: false, jump: false, shove: false },
         shoveCooldown: 0,
+        canJumpOnPlatform: false,
     };
 }

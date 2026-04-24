@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 import { setupInput } from './input.ts';
-import { updatePlayers } from './renderer.ts';
+import { updatePlatforms, updatePlayers } from './renderer.ts';
 import { displayMessage, updateUI } from './ui.ts';
 let lastState: any = null;
 const socket = io('http://localhost:2567');
@@ -13,11 +13,10 @@ const messagesEl = document.getElementById('messages')!;
 let myId: string;
 let isLeader = false;
 const playerElements: Record<string, HTMLElement> = {};
-
+const platformElements: HTMLElement[] = [];
 const name = prompt('Enter your name:') || 'Quadrober';
 socket.emit('join', name);
 
-//
 socket.on('init', data => {
     myId = data.id;
     isLeader = data.isLeader;
@@ -34,6 +33,7 @@ socket.on('state', state => {
     lastState = state;
     updateUI(state, statusEl, startBtn, isLeader);
     updatePlayers(state, playerElements, container, myId);
+    updatePlatforms(state, platformElements, container);
 });
 
 startBtn.onclick = () => socket.emit('start_game');
@@ -41,5 +41,6 @@ startBtn.onclick = () => socket.emit('start_game');
 window.onresize = () => {
     if (!lastState) return;
     updatePlayers(lastState, playerElements, container, myId);
+    updatePlatforms(lastState, platformElements, container);
     console.log('Resized: positions recalculated');
 };

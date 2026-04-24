@@ -10,11 +10,22 @@ export interface globalGravity {
     y: number;
 }
 
+export interface Platform {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    width: number;
+    height: number;
+    color: string;
+    friction: number;
+}
+
 export const TICK_RATE = 60;
 export const WORLD_SIZE = 1000;
 export const PLAYER_SIZE = 40;
 export const GRAVITY = 0.5;
-export const JUMP_FORCE = -12;
+export const JUMP_FORCE = -15;
 export const MOVE_SPEED = 0.6;
 export const FRICTION = 0.92;
 export const PUSH_FORCE = 15;

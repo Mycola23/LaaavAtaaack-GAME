@@ -1,5 +1,5 @@
 import { Player } from '../enums/Player.js';
-import { WORLD_SIZE, PLAYER_SIZE, PUSH_FORCE } from '../enums/enum.js';
+import { WORLD_SIZE, PLAYER_SIZE, PUSH_FORCE, Platform, globalGravity } from '../enums/enum.js';
 
 export function handleBoundaries(p: Player) {
     if (p.x < 0) {
@@ -35,4 +35,65 @@ export function handleShove(p: Player, allPlayers: Player[]) {
         });
     }
     if (p.shoveCooldown > 0) p.shoveCooldown--;
+}
+
+export function checkPlatformCollision(p: Player, platforms: Platform[], gravDir: globalGravity) {
+    let standing = false;
+    const SNAP_TOLERANCE = 25; // Трохи збільшили для стабільності на високих швидкостях
+
+    for (const plat of platforms) {
+        // 1. Стандартна перевірка перекриття прямокутників (AABB)
+        const isOverlapping = p.x < plat.x + plat.width && p.x + PLAYER_SIZE > plat.x && p.y < plat.y + plat.height && p.y + PLAYER_SIZE > plat.y;
+
+        if (isOverlapping) {
+            // --- ГРАВІТАЦІЯ ПО ВЕРТИКАЛІ (Y) ---
+            if (gravDir.y !== 0) {
+                // Гравітація ВНИЗ (Падаємо на ВЕРХ платформи)
+                if (gravDir.y > 0 && p.vy >= 0) {
+                    if (p.y + PLAYER_SIZE <= plat.y + SNAP_TOLERANCE) {
+                        p.y = plat.y - PLAYER_SIZE;
+                        p.vy = plat.vy; // Синхронізація швидкості падіння світу
+                        p.x += plat.vx; // Додаємо горизонтальний рух світу, щоб не "зносило"
+                        standing = true;
+                        break;
+                    }
+                }
+                // Гравітація ВГОРУ (Падаємо на НИЗ платформи)
+                else if (gravDir.y < 0 && p.vy <= 0) {
+                    if (p.y >= plat.y + plat.height - SNAP_TOLERANCE) {
+                        p.y = plat.y + plat.height;
+                        p.vy = plat.vy;
+                        p.x += plat.vx;
+                        standing = true;
+                        break;
+                    }
+                }
+            }
+
+            // --- ГРАВІТАЦІЯ ПО ГОРИЗОНТАЛІ (X) ---
+            if (gravDir.x !== 0) {
+                // Гравітація ВПРАВО (Падаємо на ЛІВИЙ бік платформи)
+                if (gravDir.x > 0 && p.vx >= 0) {
+                    if (p.x + PLAYER_SIZE <= plat.x + SNAP_TOLERANCE) {
+                        p.x = plat.x - PLAYER_SIZE;
+                        p.vx = plat.vx; // Синхронізація горизонтальної швидкості світу
+                        p.y += plat.vy; // Додаємо вертикальний рух світу
+                        standing = true;
+                        break;
+                    }
+                }
+                // Гравітація ВЛІВО (Падаємо на ПРАВИЙ бік платформи)
+                else if (gravDir.x < 0 && p.vx <= 0) {
+                    if (p.x >= plat.x + plat.width - SNAP_TOLERANCE) {
+                        p.x = plat.x + plat.width;
+                        p.vx = plat.vx;
+                        p.y += plat.vy;
+                        standing = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return standing;
 }

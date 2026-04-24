@@ -3,11 +3,12 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 
-import { GAME_STATUS, GRAVITY, TICK_RATE } from './enums/enum.js';
+import { GAME_STATUS, GRAVITY, Platform, TICK_RATE } from './enums/enum.js';
 import { Player } from './enums/Player.js';
 import { runPhysics } from './physics/physicEngine.js';
-import { handleBoundaries, handleShove } from './logic/gameLogic.js';
+import { checkPlatformCollision, handleBoundaries, handleShove } from './logic/gameLogic.js';
 import { addPlayer, removePlayer } from './logic/playerManager.js';
+import { generateMap, updatePlatforms } from './logic/platformLogic.js';
 
 const app = express();
 app.use(cors());
@@ -17,7 +18,7 @@ const io = new Server(httpServer, { cors: { origin: '*' } });
 let players: Record<string, Player> = {};
 let gameState: GAME_STATUS = GAME_STATUS.WAITING;
 let gravDir = { x: 0, y: GRAVITY };
-
+let platforms: Platform[] = generateMap();
 io.on('connection', socket => {
     socket.on('join', name => {
         const player = addPlayer(players, socket.id, name);
@@ -46,14 +47,17 @@ io.on('connection', socket => {
 setInterval(() => {
     if (gameState === GAME_STATUS.PLAY) {
         const playersArray = Object.values(players);
+        updatePlatforms(platforms, gravDir);
         playersArray.forEach(player => {
             runPhysics(player, gravDir);
+            const isStanding = checkPlatformCollision(player, platforms, gravDir);
+            player.canJumpOnPlatform = isStanding;
             handleBoundaries(player);
             handleShove(player, playersArray);
         });
     }
 
-    io.emit('state', { players, gameState, gravDir });
+    io.emit('state', { players, gameState, gravDir, platforms });
 }, 1000 / TICK_RATE);
 
 httpServer.listen(2567, () => console.log('Server running on port 2567'));
