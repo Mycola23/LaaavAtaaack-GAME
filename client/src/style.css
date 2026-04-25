@@ -135,7 +135,39 @@ svg * {
 }
 /*----------------*/
 
-#app {
+body {
+    margin: 0;
+    background: #222;
+    font-family: sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#game-container {
+    width: 90vh;
+    height: 90vh;
+    background: #eee;
+    position: relative;
+    margin-top: 20px;
+    border: 5px solid #444;
+    overflow: hidden;
+}
+
+#ui {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+#messages {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+#game-container {
     position: relative;
     width: 800px;
     height: 800px;
@@ -147,7 +179,7 @@ svg * {
     position: absolute;
     top: 0;
     left: 0;
-    width: 40px; /* Або 4% */
+    width: 40px;
     height: 40px;
     background: #00ffcc;
     border: 2px solid white;

@@ -1,65 +1,17 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>LAAAAVVVVAAA Attack</title>
-        <style>
-            body {
-                margin: 0;
-                background: #222;
-                font-family: sans-serif;
-                overflow: hidden;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            #game-container {
-                width: 90vh;
-                height: 90vh;
-                background: #eee;
-                position: relative;
-                margin-top: 20px;
-                border: 5px solid #444;
-                overflow: hidden;
-            }
-            .player {
-                position: absolute;
-                width: 4%;
-                height: 4%;
-                background: #007bff;
-                border-radius: 4px;
-                display: flex;
-                justify-content: center;
-                will-change: transform;
-            }
-            .player-name {
-                position: absolute;
-                top: -20px;
-                font-size: 12px;
-                white-space: nowrap;
-                color: #fff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 2px 4px;
-            }
-            #ui {
-                color: white;
-                margin-top: 10px;
-                text-align: center;
-            }
-            #messages {
-                position: fixed;
-                left: 10px;
-                bottom: 10px;
-                color: #aaa;
-                font-size: 14px;
-            }
-        </style>
+        <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>
         <div id="ui">
             <div id="status">Waiting for players...</div>
             <button id="start-btn" style="display: none">START GAME</button>
         </div>
-        <div id="game-container" id="app"></div>
+        <div id="game-container"></div>
         <div id="messages"></div>
 
         <script type="module" src="./src/main.ts"></script>
