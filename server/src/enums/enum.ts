@@ -20,6 +20,16 @@ export interface Platform {
     friction: number;
 }
 
+export interface Lava {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    width: number;
+    height: number;
+    color: string;
+}
+
 export const TICK_RATE = 60;
 export const WORLD_SIZE = 1000;
 export const PLAYER_SIZE = 40;

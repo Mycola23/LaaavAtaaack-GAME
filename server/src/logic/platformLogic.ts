@@ -28,7 +28,7 @@ export function generateMap(): Platform[] {
 
         for (let i = 0; i < count; i++) {
             const pWidth = Math.random() * 205 + 85;
-            const pHeight = 30;
+            const pHeight = Math.random() * 45 + 15;
 
             const x = Math.random() * (worldWidth - pWidth);
 

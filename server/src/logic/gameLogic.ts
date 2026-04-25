@@ -55,7 +55,7 @@ export function checkPlatformCollision(p: Player, platforms: Platform[], gravDir
                 if (p.y + PLAYER_SIZE <= plat.y + SNAP_TOLERANCE) {
                     p.y = plat.y - PLAYER_SIZE;
                     p.vy = plat.vy;
-                    //p.x += plat.vx;
+                    p.x += plat.vx;
                     return true;
                 }
             }

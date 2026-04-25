@@ -77,3 +77,20 @@ function createPlatformDOM(container: HTMLElement): HTMLElement {
     container.appendChild(el);
     return el;
 }
+
+export function createLava(container: HTMLElement): HTMLElement {
+    const el = document.createElement('div');
+    el.className = 'lava';
+    container.appendChild(el);
+    return el;
+}
+
+export function updateLava(state: any, lavaElement: HTMLElement, container: HTMLElement) {
+    const lava = state.lava;
+    const scale = container.clientWidth / WORLD_SIZE;
+
+    lavaElement.style.width = `${lava.width * scale}px`;
+    lavaElement.style.height = `${lava.height * scale}px`;
+    lavaElement.style.backgroundColor = lava.color;
+    lavaElement.style.transform = `translate3d(${lava.x * scale}px, ${lava.y * scale}px, 0)`;
+}

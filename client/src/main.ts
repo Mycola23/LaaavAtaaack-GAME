@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 import { setupInput } from './input.ts';
-import { updatePlatforms, updatePlayers } from './renderer.ts';
+import { createLava, updateLava, updatePlatforms, updatePlayers } from './renderer.ts';
 import { displayMessage, updateUI } from './ui.ts';
 let lastState: any = null;
 const socket = io('http://localhost:2567');
@@ -14,6 +14,7 @@ let myId: string;
 let isLeader = false;
 const playerElements: Record<string, HTMLElement> = {};
 const platformElements: HTMLElement[] = [];
+let lavaElement: HTMLElement | null = null;
 const name = prompt('Enter your name:') || 'Quadrober';
 socket.emit('join', name);
 
@@ -34,6 +35,12 @@ socket.on('state', state => {
     updateUI(state, statusEl, startBtn, isLeader);
     updatePlayers(state, playerElements, container, myId);
     updatePlatforms(state, platformElements, container);
+    if (state.lava) {
+        if (!lavaElement) {
+            lavaElement = createLava(container);
+        }
+        updateLava(state, lavaElement, container);
+    }
 });
 
 startBtn.onclick = () => socket.emit('start_game');
@@ -42,5 +49,8 @@ window.onresize = () => {
     if (!lastState) return;
     updatePlayers(lastState, playerElements, container, myId);
     updatePlatforms(lastState, platformElements, container);
+    if (lastState.lava && lavaElement) {
+        updateLava(lastState, lavaElement, container);
+    }
     console.log('Resized: positions recalculated');
 };
