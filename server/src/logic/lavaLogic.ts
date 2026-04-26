@@ -5,15 +5,13 @@ const LAVA_SPEED = 1;
 export type LavaDirection = 'down' | 'up' | 'left' | 'right';
 
 export function generateLava(direction: LavaDirection): Lava {
-    const lavaSize = Math.round(WORLD_SIZE * (Math.random() * 0.6 + 0.2));
-
     switch (direction) {
         case 'down':
             return {
                 x: 0,
                 y: WORLD_SIZE,
                 width: WORLD_SIZE,
-                height: lavaSize,
+                height: WORLD_SIZE,
                 vx: 0,
                 vy: -LAVA_SPEED,
                 color: '#ff4500',
@@ -21,18 +19,18 @@ export function generateLava(direction: LavaDirection): Lava {
         case 'up':
             return {
                 x: 0,
-                y: -lavaSize,
+                y: -WORLD_SIZE,
                 width: WORLD_SIZE,
-                height: lavaSize,
+                height: WORLD_SIZE,
                 vx: 0,
                 vy: LAVA_SPEED,
                 color: '#ff4500',
             };
         case 'left':
             return {
-                x: -lavaSize,
+                x: -WORLD_SIZE,
                 y: 0,
-                width: lavaSize,
+                width: WORLD_SIZE,
                 height: WORLD_SIZE,
                 vx: LAVA_SPEED,
                 vy: 0,
@@ -42,7 +40,7 @@ export function generateLava(direction: LavaDirection): Lava {
             return {
                 x: WORLD_SIZE,
                 y: 0,
-                width: lavaSize,
+                width: WORLD_SIZE,
                 height: WORLD_SIZE,
                 vx: -LAVA_SPEED,
                 vy: 0,

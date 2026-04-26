@@ -1,4 +1,4 @@
-export const keys = { up: false, down: false, left: false, right: false, jump: false, shove: false };
+export const keys = { up: false, down: false, left: false, right: false, jump: false, shove: false, jetpack: false };
 
 export function setupInput(socket: any) {
     const updateKey = (code: string, pressed: boolean) => {
@@ -25,6 +25,10 @@ export function setupInput(socket: any) {
         }
         if (code === 'KeyE') {
             keys.shove = pressed;
+            changed = true;
+        }
+        if (code === 'ShiftLeft') {
+            keys.jetpack = pressed;
             changed = true;
         }
 

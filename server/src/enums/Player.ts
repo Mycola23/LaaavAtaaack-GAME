@@ -7,6 +7,7 @@ export interface Player {
     vy: number;
     isLeader: boolean;
     canJumpOnPlatform: boolean;
-    input: { up: boolean; down: boolean; left: boolean; right: boolean; jump: boolean; shove: boolean };
+    input: { up: boolean; down: boolean; left: boolean; right: boolean; jump: boolean; shove: boolean; jetpack: boolean };
     shoveCooldown: number;
+    jetpackCooldown: number;
 }

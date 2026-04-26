@@ -37,6 +37,15 @@ export function handleShove(p: Player, allPlayers: Player[]) {
     if (p.shoveCooldown > 0) p.shoveCooldown--;
 }
 
+export function canUseJetpack(p: Player): boolean {
+    if (p.input.jetpack && p.jetpackCooldown <= 0) {
+        p.jetpackCooldown = 150; // === cooldown 2.5s
+        return true;
+    }
+    if (p.jetpackCooldown > 0) p.jetpackCooldown--;
+    return false;
+}
+
 export function checkPlatformCollision(p: Player, platforms: Platform[], gravDir: globalGravity): boolean {
     const SNAP_TOLERANCE = 15;
 

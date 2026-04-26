@@ -24,7 +24,7 @@ export function generateMap(): Platform[] {
     const stepY = 130;
 
     for (let y = 0; y < worldHeight; y += stepY) {
-        const count = Math.floor(Math.random() * 5) + 1;
+        const count = Math.floor(Math.random() * 5) + 3;
 
         for (let i = 0; i < count; i++) {
             const pWidth = Math.random() * 205 + 85;
