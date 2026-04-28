@@ -20,6 +20,7 @@ export function updatePlayers(state: any, playerElements: Record<string, HTMLEle
         el.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
         el.style.background = isMe ? '#28a745' : '#007bff';
         el.style.zIndex = isMe ? '10' : '1';
+        el.style.opacity = p.isAlive ? '1' : '0.3';
     }
 
     for (const id in playerElements) {
