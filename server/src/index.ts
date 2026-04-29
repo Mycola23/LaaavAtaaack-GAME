@@ -22,11 +22,16 @@ let gravDir = { x: 0, y: GRAVITY };
 let platforms: Platform[] = generateMap();
 let lava: Lava = generateLava(getLavaDirection(gravDir));
 io.on('connection', socket => {
-    socket.on('join', name => {
-        const player = addPlayer(players, socket.id, name);
-        socket.emit('init', { id: socket.id, isLeader: player.isLeader });
-        io.emit('message', `${player.name} joined the camp!`);
-    });
+   socket.on('join', name => {
+    const nameTaken = Object.values(players).some(p => p.name === name);
+    if (nameTaken) {
+        socket.emit('name_taken');
+        return;
+    }
+    const player = addPlayer(players, socket.id, name);
+    socket.emit('init', { id: socket.id, isLeader: player.isLeader });
+    io.emit('message', `${player.name} joined the camp!`);
+});
 
     socket.on('input', input => {
         if (players[socket.id]) players[socket.id].input = input;

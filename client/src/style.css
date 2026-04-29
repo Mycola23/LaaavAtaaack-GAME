@@ -283,14 +283,15 @@ body {
 
 #messages .msg {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 6px;
-    background: rgba(0, 0, 0, 0.7);
+    background: #2a2a2a;
+    border: 1px solid #444;
     border-left: 3px solid #555;
-    border-radius: 0 6px 6px 0;
-    padding: 5px 8px;
-    font-size: 12px;
-    color: #ccc;
+    border-radius: 0 4px 4px 0;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: #ddd;
     animation: slideIn 0.2s ease;
 }
 

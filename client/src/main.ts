@@ -15,14 +15,28 @@ let isLeader = false;
 const playerElements: Record<string, HTMLElement> = {};
 const platformElements: HTMLElement[] = [];
 let lavaElement: HTMLElement | null = null;
-const name = prompt('Enter your name:') || 'Quadrober';
-socket.emit('join', name);
+function askName(message: string = 'Введіть своє ім\'я:') {
+    const input = prompt(message)?.trim() || '';
+    if (!input) {
+        askName('Ім\'я не може бути порожнім:');
+        return;
+    }
+    socket.emit('join', input);
+}
+
+askName();
+
+socket.on('name_taken', () => {
+    askName('Це ім\'я вже зайняте. Введіть інше:');
+});
 
 socket.on('init', data => {
     myId = data.id;
     isLeader = data.isLeader;
     setupInput(socket);
 });
+
+
 
 socket.on('leader_update', status => {
     isLeader = status;
