@@ -25,12 +25,16 @@ const uiContainer = document.getElementById('ui')!;
 
 joinBtn.onclick = () => {
     const name = nameInput.value.trim() || 'Quadrober';
+    if (!name) {
+        nameInput.placeholder = `Ім'я не може бути порожнім`;
+        return;
+    }
     socket.emit('join', name);
     loginOverlay.style.display = 'none';
     uiContainer.style.display = 'flex';
 };
 
-nameInput.onkeydown = (e) => {
+nameInput.onkeydown = e => {
     if (e.key === 'Enter') joinBtn.click();
 };
 
@@ -38,6 +42,12 @@ socket.on('init', data => {
     myId = data.id;
     isLeader = data.isLeader;
     setupInput(socket);
+});
+
+socket.on('name_taken', () => {
+    loginOverlay.style.display = `block`;
+    uiContainer.style.display = `none`;
+    nameInput.placeholder = `Ім'я зайняте, придумайте щось цікавіше`;
 });
 
 socket.on('leader_update', status => {
@@ -59,16 +69,19 @@ restartBtnUi.onclick = () => {
 socket.on('game_over', data => {
     winnerNameBig.innerText = data.winner.name;
     winnerScoreBig.innerText = `${data.winner.score.toFixed(1)}s`;
-    
+
     finalStatsList.innerHTML = data.allPlayers
         .sort((a: any, b: any) => b.totalSurvivalTime - a.totalSurvivalTime)
-        .map((p: any) => `
+        .map(
+            (p: any) => `
             <div class="stat-item">
                 <span>${p.name}</span>
                 <span>${p.totalSurvivalTime.toFixed(1)}s</span>
             </div>
-        `).join('');
-        
+        `,
+        )
+        .join('');
+
     resultsScreen.style.display = 'flex';
 });
 
@@ -87,12 +100,9 @@ socket.on('state', state => {
     if (myId && state.players[myId]?.isAlive && state.lava) {
         const player = state.players[myId];
         const lava = state.lava;
-        const collided = 
-            player.x < lava.x + lava.width &&
-            player.x + PLAYER_SIZE > lava.x &&
-            player.y < lava.y + lava.height &&
-            player.y + PLAYER_SIZE > lava.y;
-        
+        const collided =
+            player.x < lava.x + lava.width && player.x + PLAYER_SIZE > lava.x && player.y < lava.y + lava.height && player.y + PLAYER_SIZE > lava.y;
+
         if (collided) {
             socket.emit('touched_lava');
         }

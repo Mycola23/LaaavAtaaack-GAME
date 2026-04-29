@@ -56,14 +56,14 @@ function checkRoundEnd() {
             resetRound();
         } else {
             gameState = GAME_STATUS.WAITING;
-            const winner = playersArray.reduce((prev, current) => (prev.totalSurvivalTime > current.totalSurvivalTime) ? prev : current);
-            io.emit('game_over', { 
+            const winner = playersArray.reduce((prev, current) => (prev.totalSurvivalTime > current.totalSurvivalTime ? prev : current));
+            io.emit('game_over', {
                 winner: { name: winner.name, score: winner.totalSurvivalTime },
-                allPlayers: playersArray.map(p => ({ name: p.name, totalSurvivalTime: p.totalSurvivalTime }))
+                allPlayers: playersArray.map(p => ({ name: p.name, totalSurvivalTime: p.totalSurvivalTime })),
             });
             io.emit('message', `Game Over! Winner: ${winner.name} with ${winner.totalSurvivalTime.toFixed(1)}s!`);
             currentRound = 1;
-            playersArray.forEach(p => p.totalSurvivalTime = 0);
+            playersArray.forEach(p => (p.totalSurvivalTime = 0));
         }
     }
 }
@@ -71,6 +71,11 @@ function checkRoundEnd() {
 io.on('connection', socket => {
     // ... (код join та input)
     socket.on('join', name => {
+        const nameTaken = Object.values(players).some(p => p.name === name);
+        if (nameTaken) {
+            socket.emit('name_taken');
+            return;
+        }
         const player = addPlayer(players, socket.id, name);
         if (gameState === GAME_STATUS.PLAY) {
             player.isAlive = false;
@@ -87,7 +92,7 @@ io.on('connection', socket => {
         if (players[socket.id]?.isLeader) {
             gameState = GAME_STATUS.PLAY;
             currentRound = 1;
-            Object.values(players).forEach(p => p.totalSurvivalTime = 0);
+            Object.values(players).forEach(p => (p.totalSurvivalTime = 0));
             resetRound();
             io.emit('message', 'Game Started!');
         }
