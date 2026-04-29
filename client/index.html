@@ -7,12 +7,31 @@
         <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>
-        <div id="ui">
+        <div id="login-overlay">
+            <div class="login-box">
+                <h1>LAVA ATTACK</h1>
+                <input type="text" id="name-input" placeholder="Enter your name..." maxlength="10">
+                <button id="join-btn">JOIN GAME</button>
+            </div>
+        </div>
+
+        <div id="ui" style="display: none">
             <div id="status">Waiting for players...</div>
             <button id="start-btn" style="display: none">START GAME</button>
         </div>
         <div id="game-container"></div>
         <div id="messages"></div>
+
+        <div id="results-screen" style="display: none">
+            <div class="results-box">
+                <h1>GAME OVER</h1>
+                <div id="winner-announcement">
+                    <span id="winner-name-big">Player</span> won with <span id="winner-score-big">0s</span>!
+                </div>
+                <div id="final-stats-list"></div>
+                <button id="restart-btn-ui">PLAY AGAIN</button>
+            </div>
+        </div>
 
         <script type="module" src="./src/main.ts"></script>
     </body>

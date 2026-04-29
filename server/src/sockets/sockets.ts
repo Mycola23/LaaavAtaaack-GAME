@@ -10,8 +10,12 @@ export function createPlayer(id: string, name: string, isLeader: boolean): Playe
         vx: 0,
         vy: 0,
         isLeader,
-        input: { up: false, down: false, left: false, right: false, jump: false, shove: false },
+        input: { up: false, down: false, left: false, right: false, jump: false, shove: false, jetpack: false },
         shoveCooldown: 0,
+        jetpackCooldown: 0,
         canJumpOnPlatform: false,
+        survivalTime: 0,
+        totalSurvivalTime: 0,
+        isAlive: true,
     };
 }
