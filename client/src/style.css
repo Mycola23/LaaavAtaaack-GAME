@@ -457,6 +457,19 @@ body {
     border-color: #ff9800;
 }
 
+#stats {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 200px;
+    min-height: 100%;
+}
+#status {
+    font-size: 18px;
+    color: #ffcc00;
+    font-weight: 600;
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
