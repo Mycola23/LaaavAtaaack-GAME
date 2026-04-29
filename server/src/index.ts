@@ -57,6 +57,10 @@ function checkRoundEnd() {
         } else {
             gameState = GAME_STATUS.WAITING;
             const winner = playersArray.reduce((prev, current) => (prev.totalSurvivalTime > current.totalSurvivalTime) ? prev : current);
+            io.emit('game_over', { 
+                winner: { name: winner.name, score: winner.totalSurvivalTime },
+                allPlayers: playersArray.map(p => ({ name: p.name, totalSurvivalTime: p.totalSurvivalTime }))
+            });
             io.emit('message', `Game Over! Winner: ${winner.name} with ${winner.totalSurvivalTime.toFixed(1)}s!`);
             currentRound = 1;
             playersArray.forEach(p => p.totalSurvivalTime = 0);

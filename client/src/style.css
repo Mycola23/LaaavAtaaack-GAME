@@ -236,12 +236,77 @@ body {
 #start-btn:hover {
     background: #218838;
 }
-#messages {
+#results-screen {
     position: fixed;
-    left: 10px;
-    bottom: 10px;
-    color: #aaa;
-    font-size: 14px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+}
+
+.results-box {
+    background: #333;
+    padding: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 8px 0px #000;
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    width: 90%;
+}
+
+.results-box h1 {
+    font-size: 48px;
+    color: #ff4500;
+    margin-bottom: 20px;
+    text-shadow: 4px 3px #000;
+}
+
+#winner-announcement {
+    font-size: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444;
+}
+
+#winner-name-big {
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#final-stats-list {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #444;
+}
+
+#restart-btn-ui {
+    background: #28a745;
+    color: white;
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 3px 0px #000;
+    font-weight: bold;
+}
+
+#restart-btn-ui:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 1px 0px #000;
 }
 
 /* #game-container {

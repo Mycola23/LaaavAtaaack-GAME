@@ -30,7 +30,6 @@ joinBtn.onclick = () => {
     uiContainer.style.display = 'flex';
 };
 
-// Також дозволимо вхід по натисканню Enter
 nameInput.onkeydown = (e) => {
     if (e.key === 'Enter') joinBtn.click();
 };
@@ -46,6 +45,32 @@ socket.on('leader_update', status => {
 });
 
 socket.on('message', msg => displayMessage(msg, messagesEl));
+
+const resultsScreen = document.getElementById('results-screen')!;
+const winnerNameBig = document.getElementById('winner-name-big')!;
+const winnerScoreBig = document.getElementById('winner-score-big')!;
+const finalStatsList = document.getElementById('final-stats-list')!;
+const restartBtnUi = document.getElementById('restart-btn-ui')!;
+
+restartBtnUi.onclick = () => {
+    location.reload();
+};
+
+socket.on('game_over', data => {
+    winnerNameBig.innerText = data.winner.name;
+    winnerScoreBig.innerText = `${data.winner.score.toFixed(1)}s`;
+    
+    finalStatsList.innerHTML = data.allPlayers
+        .sort((a: any, b: any) => b.totalSurvivalTime - a.totalSurvivalTime)
+        .map((p: any) => `
+            <div class="stat-item">
+                <span>${p.name}</span>
+                <span>${p.totalSurvivalTime.toFixed(1)}s</span>
+            </div>
+        `).join('');
+        
+    resultsScreen.style.display = 'flex';
+});
 
 socket.on('state', state => {
     lastState = state;
