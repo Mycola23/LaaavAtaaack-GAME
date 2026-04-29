@@ -45,8 +45,10 @@ socket.on('init', data => {
 });
 
 socket.on('name_taken', () => {
-    loginOverlay.style.display = `block`;
+    loginOverlay.style.display = `flex`;
     uiContainer.style.display = `none`;
+    nameInput.value = '';
+    nameInput.style.width = `325px`;
     nameInput.placeholder = `Ім'я зайняте, придумайте щось цікавіше`;
 });
 
