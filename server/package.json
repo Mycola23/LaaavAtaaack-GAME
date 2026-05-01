@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "type": "module",
     "scripts": {
-        "start": "tsx watch src/index.ts"
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "tsx watch src/index.ts"
     },
     "dependencies": {
         "express": "^4.19.0",
