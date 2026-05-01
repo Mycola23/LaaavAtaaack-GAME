@@ -27,6 +27,28 @@ const nameInput = document.getElementById('name-input') as HTMLInputElement;
 const joinBtn = document.getElementById('join-btn') as HTMLButtonElement;
 const uiContainer = document.getElementById('ui')!;
 
+const quitBtn = document.getElementById('quit-btn') as HTMLButtonElement;
+const quitResultsBtn = document.getElementById('quit-results-btn') as HTMLButtonElement;
+const quitGame = () => {
+    if (confirm('Ви впевнені, що хочете вийти?')) {
+        location.reload();
+    }
+};
+quitBtn.onclick = quitGame;
+quitResultsBtn.onclick = () => location.reload();
+
+const hideControlsBtn = document.getElementById('hide-controls-btn') as HTMLButtonElement;
+const controlsContent = document.getElementById('controls-content')!;
+hideControlsBtn.onclick = () => {
+    if (controlsContent.style.display === 'none') {
+        controlsContent.style.display = 'block';
+        hideControlsBtn.innerText = 'Приховати';
+    } else {
+        controlsContent.style.display = 'none';
+        hideControlsBtn.innerText = 'Показати';
+    }
+};
+
 joinBtn.onclick = () => {
     const name = nameInput.value.trim() || 'Quadrober';
     if (!name) {

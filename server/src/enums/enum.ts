@@ -30,7 +30,7 @@ export interface Lava {
     color: string;
 }
 
-export const TICK_RATE = 30; // for dev change on 60
+export const TICK_RATE = 30; // for dev change on 60, for hosting 30
 export const WORLD_SIZE = 1000;
 export const PLAYER_SIZE = 40;
 export const GRAVITY = 0.5;

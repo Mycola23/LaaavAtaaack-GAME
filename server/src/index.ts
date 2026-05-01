@@ -42,6 +42,8 @@ let roundStartTime = 0;
 let roundTimer = 0;
 
 function resetRound() {
+    gameState = GAME_STATUS.PLAY;
+
     Object.values(players).forEach(p => {
         p.isAlive = true;
         p.survivalTime = 0;
@@ -49,13 +51,16 @@ function resetRound() {
         p.y = WORLD_SIZE / 2;
         p.vx = 0;
         p.vy = 0;
+        p.canJumpOnPlatform = false;
+        p.jetpackCooldown = 0;
     });
+
     platforms = generateMap();
+    gravDir = { x: 0, y: GRAVITY };
     lava = generateLava(getLavaDirection(gravDir));
     roundTimer = 0;
     roundStartTime = Date.now();
     lastGravityTime = Date.now();
-    nextGravityChange = getRandomInterval();
 }
 
 function checkRoundEnd() {
@@ -145,7 +150,12 @@ io.on('connection', socket => {
         }
         const { name, newLeaderId } = removePlayer(players, socket.id);
         if (name) io.emit('message', `${name} left.`);
-        if (newLeaderId) io.to(newLeaderId).emit('leader_update', true);
+        if (newLeaderId) {
+            io.to(newLeaderId).emit('leader_update', true);
+        } else {
+            gameState = GAME_STATUS.WAITING;
+            currentRound = 1;
+        }
         if (gameState === GAME_STATUS.PLAY) checkRoundEnd();
     });
 });

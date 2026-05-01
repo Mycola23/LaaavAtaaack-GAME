@@ -19,28 +19,34 @@
             <div id="status">Waiting for players...</div>
             <button id="start-btn" style="display: none">START GAME</button>
             <button id="pause-btn">PAUSE GAME</button>
+            <button id="quit-btn">QUIT</button>
         </div>
 
         <div id="controls">
-            <div class="ctrl-title">Керування</div>
-            <div class="ctrl-row">
-                <span class="key">W - стрибок</span>
-                <span class="key">A - Вліво</span>
-                <span class="key">D - Вправо</span>
+            <div class="controls-head">
+                <div class="ctrl-title">Керування</div>
+                <button id="hide-controls-btn">Приховати</button>
             </div>
-            <div class="ctrl-row">
-                <span class="key">← - Вліво</span>
-                <span class="key">↑ - стрибок</span>
-                <span class="key">→ - Вправо</span>
-            </div>
-            <div class="ctrl-row">
-                <span class="key">SPACE - Стрибок</span>
-            </div>
-            <div class="ctrl-row">
-                <span class="key">E - Поштовх cooldown 0.3s</span>
-            </div>
-            <div class="ctrl-row">
-                <span class="key">Shift - Джетпак cooldown 2.5s</span>
+            <div id="controls-content">
+                <div class="ctrl-row">
+                    <span class="key">W - стрибок</span>
+                    <span class="key">A - Вліво</span>
+                    <span class="key">D - Вправо</span>
+                </div>
+                <div class="ctrl-row">
+                    <span class="key">← - Вліво</span>
+                    <span class="key">↑ - стрибок</span>
+                    <span class="key">→ - Вправо</span>
+                </div>
+                <div class="ctrl-row">
+                    <span class="key">SPACE - Стрибок</span>
+                </div>
+                <div class="ctrl-row">
+                    <span class="key">E - Поштовх cooldown 0.3s</span>
+                </div>
+                <div class="ctrl-row">
+                    <span class="key">Shift - Джетпак cooldown 2.5s</span>
+                </div>
             </div>
         </div>
 
@@ -53,6 +59,7 @@
                 <div id="winner-announcement"><span id="winner-name-big">Player</span> won with <span id="winner-score-big">0s</span>!</div>
                 <div id="final-stats-list"></div>
                 <button id="restart-btn-ui">PLAY AGAIN</button>
+                <button id="quit-results-btn">EXIT</button>
             </div>
         </div>
 

@@ -433,15 +433,9 @@ body {
     opacity: 0.9;
     z-index: 5;
     border-radius: 4px;
-
-    /* Додаємо градієнт для ефекту глибини */
     background: linear-gradient(180deg, #ff8c00 0%, #f44336 50%, #8b0000 100%);
     background-size: 100% 200%;
-
-    /* Посилюємо анімацію */
     animation: lavaMagma 2s ease-in-out infinite alternate;
-
-    /* Зовнішнє світіння (жар) */
     box-shadow:
         0 0 20px #ff4500,
         inset 0 0 15px rgba(255, 255, 255, 0.4);
@@ -466,7 +460,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    pointer-events: none;
 }
 
 #controls .ctrl-title {
@@ -579,6 +572,7 @@ body {
     box-shadow:
         8px 5px 10px rgb(0 0 0),
         inset 1px 1px 7px 0px #ffffff6b;
+    z-index: 555;
 }
 .leaderboard {
     position: absolute;
@@ -595,6 +589,7 @@ body {
     box-shadow:
         8px 5px 10px rgb(0 0 0),
         inset 1px 1px 7px 0px #ffffff6b;
+    z-index: 555;
 }
 
 #pause-btn {
@@ -617,6 +612,77 @@ body {
 
 #pause-btn:hover {
     background: #218838;
+}
+#controls-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+#quit-btn,
+#quit-results-btn {
+    text-transform: uppercase;
+    border: 2px solid #f44336;
+    background: #000;
+    color: #f44336;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow:
+        8px 5px 10px rgb(0 0 0),
+        inset 1px 1px 7px 0px #ffffff2b;
+}
+#quit-btn,
+#quit-results-btn {
+    position: absolute;
+    z-index: 55;
+    bottom: 0;
+    left: 0;
+}
+
+#quit-btn:hover,
+#quit-results-btn:hover {
+    background: #f44336;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(244, 67, 54, 0.5);
+}
+
+#quit-btn:active,
+#quit-results-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 1px 0px #000;
+}
+.controls-head {
+    display: flex;
+    flex-direction: column;
+}
+#hide-controls-btn {
+    background: #2a2a2a2d;
+    color: #ffbf0028;
+    border: 1px solid #ffc000;
+    max-width: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s ease;
+    box-shadow:
+        4px 4px 8px rgb(0 0 0),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+#hide-controls-btn:hover {
+    background: #ffc000;
+    color: #000;
+}
+
+#hide-controls-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 4px rgb(0 0 0);
 }
 
 @keyframes slideIn {
