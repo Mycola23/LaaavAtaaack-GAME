@@ -5,7 +5,8 @@ import { displayMessage, updateUI } from './ui.ts';
 import { GAME_STATUS, PLAYER_SIZE } from './enums/enum.ts';
 
 let lastState: any = null;
-const socket = io('http://localhost:2567');
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:2567';
+const socket = io(SERVER_URL);
 
 const container = document.getElementById('game-container')!;
 const statusEl = document.getElementById('status')!;

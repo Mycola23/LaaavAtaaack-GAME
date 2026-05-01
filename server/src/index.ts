@@ -163,7 +163,11 @@ setInterval(() => {
     io.emit('state', { players, gameState, gravDir, platforms, lava, roundTimer, currentRound });
 }, 1000 / TICK_RATE);
 
-httpServer.listen(2567, () => console.log('Server running on port 2567'));
+const PORT = process.env.PORT || 2567;
+
+httpServer.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 let nextGravityChange = getRandomInterval();
 function getRandomInterval(): number {
