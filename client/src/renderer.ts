@@ -92,6 +92,6 @@ export function updateLava(state: any, lavaElement: HTMLElement, container: HTML
 
     lavaElement.style.width = `${lava.width * scale}px`;
     lavaElement.style.height = `${lava.height * scale}px`;
-    lavaElement.style.backgroundColor = lava.color;
+    //lavaElement.style.backgroundColor = lava.color;
     lavaElement.style.transform = `translate3d(${lava.x * scale}px, ${lava.y * scale}px, 0)`;
 }

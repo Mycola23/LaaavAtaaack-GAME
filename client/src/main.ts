@@ -117,9 +117,11 @@ pauseBtn.onclick = () => {
     pauseBtn.blur();
     if (lastState.gameState !== GAME_STATUS.PAUSE) {
         socket.emit('start_pause');
+        pauseBtn.innerText = 'Resume Game';
         return;
     }
     socket.emit('end_pause');
+    pauseBtn.innerText = `Pause Game`;
     return;
 };
 window.onresize = () => {

@@ -159,39 +159,66 @@ body {
 }
 
 .login-box {
-    background: #333;
+    background: #33333380;
     padding: 30px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 6px 4px 2px 0px #000;
+    border: 2px solid #ffc000;
+    border-radius: 8px;
+    box-shadow:
+        8px 5px 10px rgb(0 0 0),
+        inset 1px 1px 7px 0px #ffffff6b;
     text-align: center;
 }
 
 .login-box h1 {
-    color: white;
     margin-bottom: 20px;
     font-size: 24px;
     text-shadow: 2px 2px #000;
+    font-weight: bold;
+    text-shadow: 4px 3px #ffc000;
+
+    color: #000;
+
+    background: linear-gradient(110deg, #000 35%, #ffffff 50%, #000 65%);
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation: textShine 3s linear infinite;
 }
 
 #name-input {
     padding: 10px;
     font-size: 16px;
-    background: #444;
+    background: #44444470;
+    border-radius: 8px;
     color: white;
+
     border: 1px solid #555;
     margin-bottom: 20px;
     width: 200px;
     display: block;
+    &::placeholder {
+        color: #fff;
+    }
 }
 
 #join-btn {
-    background: #28a745;
-    color: white;
+    text-transform: uppercase;
+    width: 100%;
+    border: 2px solid #ffc000;
+    background: #000;
+    color: #ffffffd1;
     padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 4px 3px 0px #000;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 5px;
+    box-shadow:
+        8px 5px 10px rgb(0 0 0),
+        inset 1px 1px 7px 0px #ffffff6b;
 }
 
 #join-btn:hover {
@@ -209,7 +236,11 @@ body {
     background: #333;
     position: relative;
     margin-top: 20px;
-    border: 5px solid #444;
+    border: 5px solid #4444448c;
+    border-radius: 8px;
+    box-shadow:
+        10px 6px 13px rgb(0 0 0),
+        -4px -1px 0px #00000000;
     overflow: hidden;
 }
 
@@ -238,7 +269,7 @@ body {
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 700;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow:
         8px 5px 10px rgb(0 0 0),
         inset 1px 1px 7px 0px #ffffff6b;
@@ -261,21 +292,44 @@ body {
 }
 
 .results-box {
-    background: #333;
+    background: #00000000;
     padding: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 10px 8px 0px #000;
     text-align: center;
     color: white;
     max-width: 500px;
     width: 90%;
+    border: 2px solid #ffc000;
+    border-radius: 8px;
+    box-shadow:
+        10px 6px 12px 2px rgb(0 0 0),
+        inset 0px 2px 6px 0px #ffffff99;
 }
 
 .results-box h1 {
     font-size: 48px;
-    color: #ff4500;
     margin-bottom: 20px;
-    text-shadow: 4px 3px #000;
+    text-shadow: 4px 3px #ffc000;
+
+    color: #000;
+
+    background: linear-gradient(110deg, #000 35%, #ffffff 50%, #000 65%);
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation: textShine 3s linear infinite;
+}
+@keyframes textShine {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
 }
 
 #winner-announcement {
@@ -305,16 +359,21 @@ body {
 }
 
 #restart-btn-ui {
-    background: #28a745;
-    color: white;
     padding: 15px 40px;
-    font-size: 20px;
-    border: none;
     cursor: pointer;
-    box-shadow: 4px 3px 0px #000;
-    font-weight: bold;
+    border: 2px solid #ffc000;
+    background: #000;
+    color: #ffffffd1;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow:
+        8px 5px 10px rgb(0 0 0),
+        inset 1px 1px 7px 0px #ffffff6b;
 }
-
+#restart-btn-ui:hover {
+    background: #218838;
+}
 #restart-btn-ui:active {
     transform: translate(2px, 2px);
     box-shadow: 2px 1px 0px #000;
@@ -362,7 +421,7 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow:
         8px 5px 10px rgb(0 0 0),
-        inset 1px 1px 7px 0px #ffffff6b;
+        inset 3px 3px 6px 0px #ffffff99;
     box-sizing: border-box;
 }
 
@@ -370,14 +429,34 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    will-change: transform;
-    opacity: 0.85;
+    will-change: transform, filter;
+    opacity: 0.9;
     z-index: 5;
-    box-shadow:
-        8px 5px 10px #ff4500,
-        inset 1px 1px 7px 0px #ff4500;
-}
+    border-radius: 4px;
 
+    /* Додаємо градієнт для ефекту глибини */
+    background: linear-gradient(180deg, #ff8c00 0%, #f44336 50%, #8b0000 100%);
+    background-size: 100% 200%;
+
+    /* Посилюємо анімацію */
+    animation: lavaMagma 2s ease-in-out infinite alternate;
+
+    /* Зовнішнє світіння (жар) */
+    box-shadow:
+        0 0 20px #ff4500,
+        inset 0 0 15px rgba(255, 255, 255, 0.4);
+}
+@keyframes lavaPulse {
+    0% {
+        filter: brightness(1) saturate(1.2) blur(0px);
+    }
+    100% {
+        filter: brightness(1.5) saturate(2) blur(1px);
+        box-shadow:
+            0 0 40px #ff8c00,
+            inset 0 0 25px rgba(255, 255, 255, 0.6);
+    }
+}
 #controls {
     position: fixed;
     left: 12px;
@@ -426,7 +505,7 @@ body {
     line-height: 1.6;
     box-shadow:
         8px 5px 10px rgb(0 0 0),
-        inset 1px 1px 7px 0px #ffffff6b;
+        inset 1px 1px 3px 0px #ffffff6b;
 }
 
 #messages {
@@ -449,12 +528,14 @@ body {
     gap: 6px;
     background: #2a2a2a;
     border: 1px solid #444;
-    border-left: 3px solid #555;
     border-radius: 0 4px 4px 0;
     padding: 4px 8px;
     font-size: 14px;
     color: #ddd;
     animation: slideIn 0.2s ease;
+    box-shadow:
+        8px 5px 10px rgb(0 0 0),
+        inset 3px 1px 3px 0px #ffffff6b;
 }
 
 #messages .msg.join {
@@ -519,6 +600,7 @@ body {
 #pause-btn {
     display: none;
     &.active {
+        text-transform: uppercase;
         display: block;
         border: 2px solid #ffc000;
         background: #000;
@@ -531,6 +613,10 @@ body {
             8px 5px 10px rgb(0 0 0),
             inset 1px 1px 7px 0px #ffffff6b;
     }
+}
+
+#pause-btn:hover {
+    background: #218838;
 }
 
 @keyframes slideIn {
