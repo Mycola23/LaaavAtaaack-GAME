@@ -12,9 +12,23 @@ import { generateMap, updatePlatforms } from './logic/platformLogic.js';
 import { generateLava, getLavaDirection, updateLava } from './logic/lavaLogic.js';
 
 const app = express();
-app.use(cors());
 const httpServer = createServer(app);
-const io = new Server(httpServer, { cors: { origin: '*' } });
+const FRONTEND_URL = 'https://laaav-ataaaack-game.vercel.app';
+app.use(
+    cors({
+        origin: FRONTEND_URL,
+        credentials: true,
+    }),
+);
+
+const io = new Server(httpServer, {
+    cors: {
+        origin: FRONTEND_URL,
+        methods: ['GET', 'POST'],
+        credentials: true,
+    },
+    allowEIO3: true,
+});
 
 let players: Record<string, Player> = {};
 let gameState: GAME_STATUS = GAME_STATUS.WAITING;

@@ -6,7 +6,9 @@ import { GAME_STATUS, PLAYER_SIZE } from './enums/enum.ts';
 
 let lastState: any = null;
 const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:2567';
-const socket = io(SERVER_URL);
+const socket = io(SERVER_URL, {
+    transports: ['websocket', 'polling'],
+});
 
 const container = document.getElementById('game-container')!;
 const statusEl = document.getElementById('status')!;
