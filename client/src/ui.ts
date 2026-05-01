@@ -16,6 +16,11 @@ export function displayMessage(msg: string, container: HTMLElement) {
 
 export function updateUI(state: any, statusEl: HTMLElement, startBtn: HTMLButtonElement, isLeader: boolean, myId: string) {
     statusEl.innerText = `Status: ${state.gameState.toUpperCase()}`;
+
+    if (state.gameState === GAME_STATUS.PLAY) {
+        document.querySelector('#pause-btn')?.classList.add('active');
+    }
+
     if (isLeader && state.gameState === GAME_STATUS.WAITING) {
         startBtn.style.display = 'block';
     } else {
@@ -25,19 +30,8 @@ export function updateUI(state: any, statusEl: HTMLElement, startBtn: HTMLButton
     let timerEl = document.getElementById('round-timer');
     if (!timerEl) {
         timerEl = document.createElement('div');
+        timerEl.className = 'round-timer';
         timerEl.id = 'round-timer';
-        timerEl.style.position = 'absolute';
-        timerEl.style.top = '0';
-        timerEl.style.right = '0';
-        timerEl.style.width = `100%`;
-        timerEl.style.fontSize = '24px';
-        timerEl.style.fontWeight = 'bold';
-        timerEl.style.color = '#ffcc00';
-        timerEl.style.backgroundColor = 'rgba(0,0,0,0.7)';
-        timerEl.style.padding = '10px 20px';
-        timerEl.style.borderRadius = '8px';
-        timerEl.style.border = '2px solid #ffcc00';
-        timerEl.style.textAlign = 'right';
         document.querySelector('#stats')?.appendChild(timerEl);
     }
 
@@ -65,18 +59,8 @@ export function updateUI(state: any, statusEl: HTMLElement, startBtn: HTMLButton
     let leaderboardEl = document.getElementById('leaderboard');
     if (!leaderboardEl) {
         leaderboardEl = document.createElement('div');
+        leaderboardEl.className = 'leaderboard';
         leaderboardEl.id = 'leaderboard';
-        leaderboardEl.style.position = 'absolute';
-        leaderboardEl.style.top = '100px';
-        leaderboardEl.style.width = `100%`;
-        leaderboardEl.style.right = '';
-        leaderboardEl.style.color = 'white';
-        leaderboardEl.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        leaderboardEl.style.border = '2px solid #ffcc00';
-        leaderboardEl.style.padding = '10px';
-        leaderboardEl.style.borderRadius = '8px';
-        leaderboardEl.style.fontSize = '18px';
-        leaderboardEl.style.textAlign = 'right';
         document.querySelector('#stats')?.appendChild(leaderboardEl);
     }
 

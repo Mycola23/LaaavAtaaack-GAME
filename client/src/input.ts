@@ -37,6 +37,11 @@ export function setupInput(socket: any) {
         }
     };
 
-    window.onkeydown = e => updateKey(e.code, true);
+    window.onkeydown = e => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+        }
+        updateKey(e.code, true);
+    };
     window.onkeyup = e => updateKey(e.code, false);
 }

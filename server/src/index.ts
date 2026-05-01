@@ -108,6 +108,22 @@ io.on('connection', socket => {
         }
     });
 
+    socket.on('start_pause', () => {
+        if (players[socket.id]?.isLeader) {
+            gameState = GAME_STATUS.PAUSE;
+            io.emit('message', `${players[socket.id].name} paused game!`);
+            io.emit('show_pause-screen');
+        }
+    });
+
+    socket.on('end_pause', () => {
+        if (players[socket.id]?.isLeader) {
+            gameState = GAME_STATUS.PLAY;
+            io.emit('message', `${players[socket.id].name} continue game!`);
+            io.emit('hide_pause-screen');
+        }
+    });
+
     socket.on('disconnect', () => {
         const player = players[socket.id];
         if (player && player.isAlive && gameState === GAME_STATUS.PLAY) {

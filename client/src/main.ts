@@ -2,7 +2,7 @@ import { io } from 'socket.io-client';
 import { setupInput } from './input.ts';
 import { createLava, updateLava, updatePlatforms, updatePlayers } from './renderer.ts';
 import { displayMessage, updateUI } from './ui.ts';
-import { PLAYER_SIZE } from './enums/enum.ts';
+import { GAME_STATUS, PLAYER_SIZE } from './enums/enum.ts';
 
 let lastState: any = null;
 const socket = io('http://localhost:2567');
@@ -10,10 +10,11 @@ const socket = io('http://localhost:2567');
 const container = document.getElementById('game-container')!;
 const statusEl = document.getElementById('status')!;
 const startBtn = document.getElementById('start-btn') as HTMLButtonElement;
+const pauseBtn = document.getElementById('pause-btn') as HTMLButtonElement;
 const messagesEl = document.getElementById('messages')!;
 
 let myId: string;
-let isLeader = false;
+let isLeader: boolean = false;
 const playerElements: Record<string, HTMLElement> = {};
 const platformElements: HTMLElement[] = [];
 let lavaElement: HTMLElement | null = null;
@@ -112,7 +113,15 @@ socket.on('state', state => {
 });
 
 startBtn.onclick = () => socket.emit('start_game');
-
+pauseBtn.onclick = () => {
+    pauseBtn.blur();
+    if (lastState.gameState !== GAME_STATUS.PAUSE) {
+        socket.emit('start_pause');
+        return;
+    }
+    socket.emit('end_pause');
+    return;
+};
 window.onresize = () => {
     if (!lastState) return;
     updatePlayers(lastState, playerElements, container, myId);
