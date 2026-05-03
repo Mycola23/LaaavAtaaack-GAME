@@ -13,7 +13,7 @@ import { generateLava, getLavaDirection, updateLava } from './logic/lavaLogic.js
 
 const app = express();
 const httpServer = createServer(app);
-const FRONTEND_URL = 'https://laaav-ataaaack-game.vercel.app';
+const FRONTEND_URL = 'https://laaav-ataaack-game.vercel.app';
 app.use(
     cors({
         origin: FRONTEND_URL,
