@@ -9,11 +9,11 @@
   </p>
 
   <p>
-    <a href="#-key-features">Функціонал</a> •
-    <a href="#-mechanics">Механіка</a> •
-    <a href="#-tech-stack">Стек технологій</a> •
-    <a href="#-getting-started">Запуск</a> •
-    <a href="https://laaav-ataaaack-game.vercel.app/">Грати Online</a>
+    <a href="#-ключові-можливості">Функціонал</a> •
+    <a href="#-ігрова-механіка">Механіка</a> •
+    <a href="#-технічний-стек">Стек технологій</a> •
+    <a href="#-швидкий-запуск-local">Запуск</a> •
+    <a href="https://laaav-ataaack-game.vercel.app/">Грати Online</a>
   </p>
 
   <!-- Badges -->
@@ -133,7 +133,7 @@ npm run dev
 - **Backend:** Fly.io
 - **Обмеження:** Через безкоштовний тариф сервера частота оновлень обмежена до **30 FPS**.
 
-👉 [**ГРАТИ ЗАРАЗ**](https://laaav-ataaaack-game.vercel.app/)
+👉 [**ГРАТИ ЗАРАЗ**](https://laaav-ataaack-game.vercel.app/)
 
 ---
 
